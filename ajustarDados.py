@@ -14,7 +14,7 @@ def tratarDados():
 
    
     for linha in ref_arquivo:
-        linha_info = linha.split()
+        linha_info = linha.split('\t')
         linha_info = filtroLinha(linha_info)
         cliente = {
             "idade": None,
@@ -28,16 +28,12 @@ def tratarDados():
             "proposito": None,
             "indice": None
         }
-
+        print(linha_info)
         for coluna_contador in range(len(linha_info)):
           # aqui vou fazer a analise de todos os dados e inserir de maneira correta no 'arquivoPronto.txt' para ser usado no 'projetoCredito.py'
 
-
-
                 if coluna_contador == 0: # IDADE
-                    #print('linha: ',linha_info[coluna_contador])
                     cliente["idade"] = linha_info[coluna_contador]
-                    #print('clientes: ',cliente['idade'])
                 elif coluna_contador == 1: # SEXO
 
                     if linha_info[coluna_contador] == 'female':
@@ -46,19 +42,18 @@ def tratarDados():
                         cliente["sexo"] = 1
 
                 elif coluna_contador == 2: # EMPREGO
-                    #print(linha_info[coluna_contador])
                     cliente["emprego"] = linha_info[coluna_contador]
                 elif coluna_contador == 3: # HABITACAO
-                    #print(linha_info[coluna_contador])
+
                     if linha_info[coluna_contador] == 'own':
                         cliente["habitacao"] = 0
                     elif linha_info[coluna_contador] == 'rent':
                         cliente["habitacao"] = 1
-                    else:
+                    elif linha_info["habitacao"] == 'free':
                         cliente["habitacao"] = 2
 
                 elif coluna_contador == 4: # POUPANCA
-                    #print(linha_info[coluna_contador])
+
                     if linha_info[coluna_contador] == 'no':
                         cliente["poupanca"] = 0
                     elif linha_info[coluna_contador] == 'little':
@@ -69,6 +64,8 @@ def tratarDados():
                         cliente["poupanca"] = 3
                     elif linha_info[coluna_contador] == 'quiteRich':
                         cliente["poupanca"] = 4
+                    else:
+                        cliente["poupanca"] =  'ERRO'
 
                 elif coluna_contador == 5: # CORRENTE
 
@@ -82,15 +79,16 @@ def tratarDados():
                         cliente["corrente"] = 3
                     elif linha_info[coluna_contador] == 'quiteRich':
                         cliente["corrente"] = 4
+                    else:
+                        cliente["corrente"] =  'ERRO'
 
                 elif coluna_contador == 6: # CRÉDITO
                     cliente["credito"] = linha_info[coluna_contador]
                 elif coluna_contador == 7: # DURAÇÃO
                     cliente["duracao"] = linha_info[coluna_contador]
                 elif coluna_contador == 8: # PROPOSITO
-
+                    
                     if linha_info[coluna_contador] == 'radio/TV':
-
                         cliente["proposito"] =1
                     elif linha_info[coluna_contador] == 'vacation/others':
                         cliente["proposito"] =2
@@ -106,6 +104,8 @@ def tratarDados():
                         cliente["proposito"] =7
                     elif linha_info[coluna_contador] == 'repairs':
                         cliente["proposito"] =8
+                    else:
+                        cliente["proposito"] =  'ERRO'
                 else: # INDICE_APROVACAO
                     #print(linha_info[coluna_contador])
                     cliente["indice"] = linha_info[coluna_contador]
@@ -114,10 +114,10 @@ def tratarDados():
 
 
         lista_clientes.append(cliente)
-        print(cliente)
+        #print(cliente)
 
 
-        #print(lista_clientes)
+
 
 
 
