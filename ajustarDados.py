@@ -1,176 +1,127 @@
-ref_arquivo = open('./german_credit.txt','r')
-arquivo_pronto = open('./arquivoPronto.txt','w')
+from funcoes import *
 
-#criando uma lista de clientes
-lista_clientes = []
+def tratarDados():
 
-cliente = {
-  "idade": None,
-  "sexo": None,
-  "emprego": None,
-  "habitacao": None,
-  "poupanca": None,
-  "corrente": None,
-  "credito": None,
-  "duracao": None,
-  "proposito": None,
-  "indice": None
-}
+    ref_arquivo = open('./german_credit.txt','r')
+    #arquivo_pronto = open('./arquivoPronto.txt','w')
 
-linhas = ref_arquivo.readlines()
+    #criando uma lista de cliente
+    lista_clientes = []
 
-for linha in linhas:
-  linha_info = linha.split()
+    
 
-  for coluna_contador in range(len(linha_info)):
-      # aqui vou fazer a analise de todos os dados e inserir de maneira correta no 'arquivoPronto.txt' para ser usado no 'projetoCredito.py'
-        clientes = cliente
-        if len(linha_info) == 10:
+    #linhas = ref_arquivo.readlines()
 
-            if coluna_contador == 0: # IDADE
-                clientes["idade"] = linha_info[coluna_contador]
-            elif coluna_contador == 1: # SEXO
+   
+    for linha in ref_arquivo:
+        linha_info = linha.split()
+        linha_info = filtroLinha(linha_info)
+        cliente = {
+            "idade": None,
+            "sexo": None,
+            "emprego": None,
+            "habitacao": None,
+            "poupanca": None,
+            "corrente": None,
+            "credito": None,
+            "duracao": None,
+            "proposito": None,
+            "indice": None
+        }
 
-                if linha_info[coluna_contador] == 'Female':
-                    clientes["sexo"] = 0
-                else:
-                    clientes["sexo"] = 1
+        for coluna_contador in range(len(linha_info)):
+          # aqui vou fazer a analise de todos os dados e inserir de maneira correta no 'arquivoPronto.txt' para ser usado no 'projetoCredito.py'
 
-            elif coluna_contador == 2: # EMPREGO
-                clientes["emprego"] = linha_info[coluna_contador]
-            elif coluna_contador == 3: # HABITACAO
 
-                if linha_info[coluna_contador] == 'own':
-                    clientes["emprego"] = 0
-                elif linha_info[coluna_contador] == 'rent':
-                    clientes["emprego"] = 1
-                else:
-                    clientes["emprego"] = 2
 
-            elif coluna_contador == 4: # POUPANCA
+                if coluna_contador == 0: # IDADE
+                    #print('linha: ',linha_info[coluna_contador])
+                    cliente["idade"] = linha_info[coluna_contador]
+                    #print('clientes: ',cliente['idade'])
+                elif coluna_contador == 1: # SEXO
 
-                if linha_info[coluna_contador] == 'no':
-                    clientes["poupanca"] = 0
-                elif linha_info[coluna_contador] == 'little':
-                    clientes["poupanca"] = 1
-                elif linha_info[coluna_contador] == 'moderate':
-                    clientes["poupanca"] = 2
-                elif linha_info[coluna_contador] == 'rich':
-                    clientes["poupanca"] = 3
-                elif linha_info[coluna_contador] == 'quite rich':
-                    clientes["poupanca"] = 4
+                    if linha_info[coluna_contador] == 'female':
+                        cliente["sexo"] = 0
+                    else:
+                        cliente["sexo"] = 1
 
-            elif coluna_contador == 5: # CORRENTE
+                elif coluna_contador == 2: # EMPREGO
+                    #print(linha_info[coluna_contador])
+                    cliente["emprego"] = linha_info[coluna_contador]
+                elif coluna_contador == 3: # HABITACAO
+                    #print(linha_info[coluna_contador])
+                    if linha_info[coluna_contador] == 'own':
+                        cliente["habitacao"] = 0
+                    elif linha_info[coluna_contador] == 'rent':
+                        cliente["habitacao"] = 1
+                    else:
+                        cliente["habitacao"] = 2
 
-                if linha_info[coluna_contador] == 'no':
-                    clientes["corrente"] = 0
-                elif linha_info[coluna_contador] == 'little':
-                    clientes["corrente"] = 1
-                elif linha_info[coluna_contador] == 'moderate':
-                    clientes["corrente"] = 2
-                elif linha_info[coluna_contador] == 'rich':
-                    clientes["corrente"] = 3
-                elif linha_info[coluna_contador] == 'quite rich':
-                    clientes["corrente"] = 4
+                elif coluna_contador == 4: # POUPANCA
+                    #print(linha_info[coluna_contador])
+                    if linha_info[coluna_contador] == 'no':
+                        cliente["poupanca"] = 0
+                    elif linha_info[coluna_contador] == 'little':
+                        cliente["poupanca"] = 1
+                    elif linha_info[coluna_contador] == 'moderate':
+                        cliente["poupanca"] = 2
+                    elif linha_info[coluna_contador] == 'rich':
+                        cliente["poupanca"] = 3
+                    elif linha_info[coluna_contador] == 'quiteRich':
+                        cliente["poupanca"] = 4
 
-            elif coluna_contador == 6: # CRÉDITO
-                clientes["credito"] = linha_info[coluna_contador]
-            elif coluna_contador == 7: # DURAÇÃO
-                clientes["duracao"] = linha_info[coluna_contador]
-            elif coluna_contador == 8: # PROPOSITO
-                if linha_info[coluna_contador] == 'radio/TV':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'vacation/others':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'furniture/equipment':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'car':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'business':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'domestic appliances':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'education':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'repairs':
-                    clientes["corrente"] =
-            else: # INDICE_APROVACAO
-                clientes["indice"] = linha_info[coluna_contador]
+                elif coluna_contador == 5: # CORRENTE
 
-        #tratando o erro no caso de linha_info possuir 11 linhas
-        elif len(linha_info) == 11:
+                    if linha_info[coluna_contador] == 'no':
+                        cliente["corrente"] = 0
+                    elif linha_info[coluna_contador] == 'little':
+                        cliente["corrente"] = 1
+                    elif linha_info[coluna_contador] == 'moderate':
+                        cliente["corrente"] = 2
+                    elif linha_info[coluna_contador] == 'rich':
+                        cliente["corrente"] = 3
+                    elif linha_info[coluna_contador] == 'quiteRich':
+                        cliente["corrente"] = 4
 
-            if coluna_contador == 0:  # IDADE
-                clientes["idade"] = linha_info[coluna_contador]
-            elif coluna_contador == 1:  # SEXO
+                elif coluna_contador == 6: # CRÉDITO
+                    cliente["credito"] = linha_info[coluna_contador]
+                elif coluna_contador == 7: # DURAÇÃO
+                    cliente["duracao"] = linha_info[coluna_contador]
+                elif coluna_contador == 8: # PROPOSITO
 
-                if linha_info[coluna_contador] == 'Female':
-                    clientes["sexo"] = 0
-                else:
-                    clientes["sexo"] = 1
+                    if linha_info[coluna_contador] == 'radio/TV':
 
-            elif coluna_contador == 2:  # EMPREGO
-                clientes["emprego"] = linha_info[coluna_contador]
-            elif coluna_contador == 3:  # HABITACAO
+                        cliente["proposito"] =1
+                    elif linha_info[coluna_contador] == 'vacation/others':
+                        cliente["proposito"] =2
+                    elif linha_info[coluna_contador] == 'furniture/equipment':
+                        cliente["proposito"] =3
+                    elif linha_info[coluna_contador] == 'car':
+                        cliente["proposito"] =4
+                    elif linha_info[coluna_contador] == 'business':
+                        cliente["proposito"] =5
+                    elif linha_info[coluna_contador] == 'domesticAppliances':
+                        cliente["proposito"] =6
+                    elif linha_info[coluna_contador] == 'education':
+                        cliente["proposito"] =7
+                    elif linha_info[coluna_contador] == 'repairs':
+                        cliente["proposito"] =8
+                else: # INDICE_APROVACAO
+                    #print(linha_info[coluna_contador])
+                    cliente["indice"] = linha_info[coluna_contador]
 
-                if linha_info[coluna_contador] == 'own':
-                    clientes["emprego"] = 0
-                elif linha_info[coluna_contador] == 'rent':
-                    clientes["emprego"] = 1
-                else:
-                    clientes["emprego"] = 2
 
-            elif coluna_contador == 4:  # POUPANCA
 
-                if linha_info[coluna_contador] == 'no':
-                    clientes["poupanca"] = 0
-                elif linha_info[coluna_contador] == 'little':
-                    clientes["poupanca"] = 1
-                elif linha_info[coluna_contador] == 'moderate':
-                    clientes["poupanca"] = 2
-                elif linha_info[coluna_contador] == 'rich':
-                    clientes["poupanca"] = 3
-                elif linha_info[coluna_contador] == 'quite rich':
-                    clientes["poupanca"] = 4
 
-            elif coluna_contador == 5:  # CORRENTE
+        lista_clientes.append(cliente)
+        print(cliente)
 
-                if linha_info[coluna_contador] == 'no':
-                    clientes["corrente"] = 0
-                elif linha_info[coluna_contador] == 'little':
-                    clientes["corrente"] = 1
-                elif linha_info[coluna_contador] == 'moderate':
-                    clientes["corrente"] = 2
-                elif linha_info[coluna_contador] == 'rich':
-                    clientes["corrente"] = 3
-                elif linha_info[coluna_contador] == 'quite rich':
-                    clientes["corrente"] = 4
 
-            elif coluna_contador == 6:  # CRÉDITO
-                clientes["credito"] = linha_info[coluna_contador]
-            elif coluna_contador == 7:  # DURAÇÃO
-                clientes["duracao"] = linha_info[coluna_contador]
-            elif coluna_contador == 8:  # PROPOSITO
-                if linha_info[coluna_contador] == 'radio/TV':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'vacation/others':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'furniture/equipment':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'car':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'business':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'domestic appliances':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'education':
-                    clientes["corrente"] =
-                elif linha_info[coluna_contador] == 'repairs':
-                    clientes["corrente"] =
-            else:  # INDICE_APROVACAO
-                clientes["indice"] = linha_info[coluna_contador]
+        #print(lista_clientes)
 
-  lista_clientes.append(clientes)
 
-ref_arquivo.close()
-arquivo_pronto.close()
+
+    ref_arquivo.close()
+    #arquivo_pronto.close()
+
+tratarDados()
