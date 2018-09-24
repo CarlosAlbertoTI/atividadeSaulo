@@ -9,24 +9,13 @@ def geraAleatorios():
   return listaAlfa
 
 
-def filtroLinha(linhaAtual):
-  if (len(linhaAtual) == 10):
-    return linhaAtual
-  elif (len(linhaAtual) == 11) or (len(linhaAtual) == 12):
-    linhaNova = []
-    coluna = 0
-    while coluna < len(linhaAtual):
-      if ((linhaAtual[coluna] == 'quite') or (linhaAtual[coluna] == 'rich') or (linhaAtual[coluna] == 'domestic') or (
-        linhaAtual[coluna] == 'appliances')):
-
-        if ((linhaAtual[coluna] == 'quite') and (linhaAtual[coluna + 1] == 'rich')):
-          linhaNova.append('quiteRich')
-
-        if ((linhaAtual[coluna] == 'domestic') and (linhaAtual[coluna + 1] == 'appliances')):
-          linhaNova.append('domesticAppliances')
-      else:
-        linhaNova.append(linhaAtual[coluna])
-
-      coluna += 1
-
-    return linhaNova
+def calibrar(lista,epoca,contador):
+  #se contador e epoca for 0 significa que ele esta na primeira execução da linha
+  lista_Alfa = geraAleatorios()
+  if contador == 0 and epoca == 0:
+      #agora eu tenho que chamar os valores de lista_random e lista para junta-los numa variavel IA
+      IA = (lista_Alfa[0]*lista["idade"])+(lista_Alfa[1]*lista["sexo"])+(lista_Alfa[2]*lista["emprego"])+(lista_Alfa[3]*lista["habitacao"])+(lista_Alfa[4]*lista["poucanca"])+(lista_Alfa[5]*lista["corrente"])+(lista_Alfa[6]*lista["credito"])+(lista_Alfa[7]*lista["duracao"])+(lista_Alfa[8]*lista["proposito"])
+      print(IA)
+  else:
+      IA = (lista_Alfa[0]*lista["idade"]) + (lista_Alfa[1]*lista["sexo"]) + (lista_Alfa[2] * lista["emprego"]) + (lista_Alfa[3] * lista["habitacao"]) + (lista_Alfa[4] * lista["poucanca"]) + (lista_Alfa[5] * lista["corrente"]) + (lista_Alfa[6] * lista["credito"]) + (lista_Alfa[7] * lista["duracao"]) + (lista_Alfa[8] * lista["proposito"])
+      print(IA)
